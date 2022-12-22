@@ -1,0 +1,691 @@
+
+TABLE: _annotated_file
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+('seed', 'longblob', 'NO', '', None, '')
+('cm', 'longblob', 'NO', '', None, '')
+('full', 'longblob', 'YES', '', None, '')
+
+TABLE: _family_file
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('seed', 'longblob', 'NO', '', None, '')
+('cm', 'longblob', 'NO', '', None, '')
+
+TABLE: _genome_data
+--------------------------------------------
+('data_file', 'mediumtext', 'NO', '', None, '')
+('author', 'varchar(45)', 'NO', '', None, '')
+('uuid', 'varchar(45)', 'NO', '', None, '')
+('status', "enum('DONE','PEND','RUN','FAIL','KILL')", 'NO', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('opened', 'datetime', 'YES', '', None, '')
+('closed', 'datetime', 'YES', '', None, '')
+('message', 'mediumtext', 'YES', '', None, '')
+('lsf_id', 'int(8) unsigned', 'YES', '', None, '')
+
+TABLE: _lock
+--------------------------------------------
+('locked', 'tinyint(1)', 'NO', '', None, '')
+('locker', 'varchar(10)', 'NO', '', None, '')
+('allowCommits', 'tinyint(1)', 'NO', '', None, '')
+('alsoAllow', 'text', 'YES', '', None, '')
+
+TABLE: _overlap
+--------------------------------------------
+('auto_overlap', 'int(10)', 'NO', 'PRI', None, 'auto_increment')
+('id', 'varchar(40)', 'YES', '', None, '')
+('description', 'varchar(100)', 'YES', '', None, '')
+('author', 'tinytext', 'YES', '', None, '')
+('comment', 'longtext', 'YES', '', None, '')
+
+TABLE: _overlap_membership
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('auto_overlap', 'int(10)', 'NO', 'MUL', None, '')
+
+TABLE: _post_process
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('author', 'varchar(45)', 'NO', '', None, '')
+('uuid', 'varchar(45)', 'NO', '', None, '')
+('status', "enum('DONE','PEND','RUN','FAIL','KILL')", 'NO', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('opened', 'datetime', 'YES', '', None, '')
+('closed', 'datetime', 'YES', '', None, '')
+('message', 'mediumtext', 'YES', '', None, '')
+('lsf_id', 'int(8) unsigned', 'YES', '', None, '')
+
+TABLE: alignment_and_tree
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('type', "enum('seed','seedTax','genome','genomeTax')", 'NO', '', None, '')
+('alignment', 'longblob', 'YES', '', None, '')
+('tree', 'longblob', 'YES', '', None, '')
+('treemethod', 'tinytext', 'YES', '', None, '')
+('average_length', 'double(7,2)', 'YES', '', None, '')
+('percent_id', 'double(5,2)', 'YES', '', None, '')
+('number_of_sequences', 'bigint(20)', 'YES', '', None, '')
+
+TABLE: author
+--------------------------------------------
+('author_id', 'int(11)', 'NO', 'PRI', None, 'auto_increment')
+('name', 'varchar(20)', 'NO', '', None, '')
+('last_name', 'varchar(50)', 'YES', '', None, '')
+('initials', 'varchar(4)', 'YES', '', None, '')
+('orcid', 'varchar(19)', 'YES', '', None, '')
+('synonyms', 'varchar(100)', 'YES', '', None, '')
+
+TABLE: clan
+--------------------------------------------
+('clan_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+('id', 'varchar(40)', 'YES', '', None, '')
+('previous_id', 'tinytext', 'YES', '', None, '')
+('description', 'varchar(100)', 'YES', '', None, '')
+('author', 'tinytext', 'YES', '', None, '')
+('comment', 'longtext', 'YES', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', None, '')
+
+TABLE: clan_database_link
+--------------------------------------------
+('clan_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('db_id', 'tinytext', 'NO', '', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('db_link', 'tinytext', 'NO', '', None, '')
+('other_params', 'tinytext', 'YES', '', None, '')
+
+TABLE: clan_literature_reference
+--------------------------------------------
+('clan_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pmid', 'int(10)', 'NO', 'MUL', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('order_added', 'tinyint(3)', 'YES', '', None, '')
+
+TABLE: clan_membership
+--------------------------------------------
+('clan_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('rfam_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+
+TABLE: database_link
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('db_id', 'tinytext', 'NO', '', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('db_link', 'tinytext', 'NO', '', None, '')
+('other_params', 'tinytext', 'YES', '', None, '')
+
+TABLE: db_version
+--------------------------------------------
+('rfam_release', 'double(4,1)', 'NO', 'PRI', None, '')
+('rfam_release_date', 'datetime', 'NO', '', None, '')
+('number_families', 'int(10)', 'NO', '', None, '')
+('embl_release', 'tinytext', 'NO', '', None, '')
+('genome_collection_date', 'datetime', 'YES', '', None, '')
+('refseq_version', 'int(11)', 'YES', '', None, '')
+('pdb_date', 'datetime', 'YES', '', None, '')
+('infernal_version', 'varchar(45)', 'YES', '', None, '')
+
+TABLE: dead_clan
+--------------------------------------------
+('clan_acc', 'varchar(7)', 'NO', 'PRI', '', '')
+('clan_id', 'varchar(40)', 'NO', '', None, '')
+('comment', 'mediumtext', 'YES', '', None, '')
+('forward_to', 'varchar(7)', 'YES', '', None, '')
+('user', 'tinytext', 'NO', '', None, '')
+
+TABLE: dead_family
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'PRI', '', '')
+('rfam_id', 'varchar(40)', 'NO', '', None, '')
+('comment', 'mediumtext', 'YES', '', None, '')
+('forward_to', 'varchar(7)', 'YES', '', None, '')
+('title', 'varchar(150)', 'YES', '', None, '')
+('user', 'tinytext', 'NO', '', None, '')
+
+TABLE: ensembl_names
+--------------------------------------------
+('insdc', 'varchar(50)', 'NO', 'PRI', '', '')
+('ensembl', 'varchar(50)', 'YES', '', None, '')
+
+TABLE: family
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+('rfam_id', 'varchar(40)', 'NO', 'MUL', None, '')
+('auto_wiki', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('description', 'varchar(75)', 'YES', '', None, '')
+('author', 'tinytext', 'YES', '', None, '')
+('seed_source', 'tinytext', 'YES', '', None, '')
+('gathering_cutoff', 'double(5,2)', 'YES', '', None, '')
+('trusted_cutoff', 'double(5,2)', 'YES', '', None, '')
+('noise_cutoff', 'double(5,2)', 'YES', '', None, '')
+('comment', 'longtext', 'YES', '', None, '')
+('previous_id', 'tinytext', 'YES', '', None, '')
+('cmbuild', 'tinytext', 'YES', '', None, '')
+('cmcalibrate', 'tinytext', 'YES', '', None, '')
+('cmsearch', 'tinytext', 'YES', '', None, '')
+('num_seed', 'bigint(20)', 'YES', '', None, '')
+('num_full', 'bigint(20)', 'YES', '', None, '')
+('num_genome_seq', 'bigint(20)', 'YES', '', None, '')
+('num_refseq', 'bigint(20)', 'YES', '', None, '')
+('type', 'varchar(50)', 'YES', '', None, '')
+('structure_source', 'tinytext', 'YES', '', None, '')
+('number_of_species', 'bigint(20)', 'YES', '', None, '')
+('number_3d_structures', 'int(11)', 'YES', '', None, '')
+('num_pseudonokts', 'int(11)', 'YES', '', None, '')
+('tax_seed', 'mediumtext', 'YES', '', None, '')
+('ecmli_lambda', 'double(10,5)', 'YES', '', None, '')
+('ecmli_mu', 'double(10,5)', 'YES', '', None, '')
+('ecmli_cal_db', 'mediumint(9)', 'YES', '', '0', '')
+('ecmli_cal_hits', 'mediumint(9)', 'YES', '', '0', '')
+('maxl', 'mediumint(9)', 'YES', '', '0', '')
+('clen', 'mediumint(9)', 'YES', '', '0', '')
+('match_pair_node', 'tinyint(1)', 'YES', '', '0', '')
+('hmm_tau', 'double(10,5)', 'YES', '', None, '')
+('hmm_lambda', 'double(10,5)', 'YES', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'on update CURRENT_TIMESTAMP')
+
+TABLE: family_author
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', '', None, '')
+('author_id', 'int(11)', 'NO', '', None, '')
+('desc_order', 'int(4)', 'NO', '', None, '')
+
+TABLE: family_literature_reference
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pmid', 'int(10)', 'NO', 'MUL', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('order_added', 'tinyint(3)', 'YES', '', None, '')
+
+TABLE: family_long
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('referenece_structure', 'longtext', 'YES', '', None, '')
+('reference_sequence', 'longtext', 'YES', '', None, '')
+
+TABLE: family_ncbi
+--------------------------------------------
+('ncbi_id', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('rfam_id', 'varchar(40)', 'YES', '', None, '')
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+
+TABLE: features
+--------------------------------------------
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('database_id', 'varchar(50)', 'NO', '', None, '')
+('primary_id', 'varchar(100)', 'NO', '', None, '')
+('secondary_id', 'varchar(255)', 'YES', '', None, '')
+('feat_orient', 'tinyint(3)', 'NO', '', '0', '')
+('feat_start', 'bigint(19) unsigned', 'NO', '', '0', '')
+('feat_end', 'bigint(19) unsigned', 'NO', '', '0', '')
+('quaternary_id', 'varchar(150)', 'YES', '', None, '')
+
+TABLE: full_region
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('rfamseq_acc', 'varchar(25)', 'NO', 'MUL', '', '')
+('seq_start', 'bigint(19) unsigned', 'NO', '', '0', '')
+('seq_end', 'bigint(19) unsigned', 'NO', '', None, '')
+('bit_score', 'double(7,2)', 'NO', '', '0.00', '')
+('evalue_score', 'varchar(15)', 'NO', '', '0', '')
+('cm_start', 'mediumint(8) unsigned', 'NO', '', None, '')
+('cm_end', 'mediumint(8) unsigned', 'NO', '', None, '')
+('truncated', "enum('0','5','3','53')", 'NO', '', None, '')
+('type', "enum('seed','full')", 'NO', '', 'full', '')
+('is_significant', 'tinyint(1) unsigned', 'NO', 'MUL', None, '')
+
+TABLE: genome
+--------------------------------------------
+('upid', 'varchar(20)', 'NO', 'PRI', '', '')
+('assembly_acc', 'varchar(20)', 'YES', '', None, '')
+('assembly_version', 'int(4) unsigned', 'YES', '', None, '')
+('wgs_acc', 'varchar(20)', 'YES', '', None, '')
+('wgs_version', 'int(4) unsigned', 'YES', '', None, '')
+('assembly_name', 'varchar(100)', 'YES', '', None, '')
+('assembly_level', "enum('contig','chromosome','scaffold','complete-genome')", 'YES', '', None, '')
+('study_ref', 'varchar(20)', 'YES', '', None, '')
+('description', 'mediumtext', 'YES', '', None, '')
+('total_length', 'bigint(20)', 'YES', '', None, '')
+('ungapped_length', 'bigint(20)', 'YES', '', None, '')
+('circular', 'tinyint(3)', 'YES', '', None, '')
+('ncbi_id', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('scientific_name', 'varchar(300)', 'YES', '', None, '')
+('common_name', 'varchar(200)', 'YES', '', None, '')
+('kingdom', 'varchar(50)', 'YES', '', None, '')
+('num_rfam_regions', 'int(10)', 'YES', '', None, '')
+('num_families', 'int(10)', 'YES', '', None, '')
+('is_reference', 'tinyint(1)', 'NO', '', '1', '')
+('is_representative', 'tinyint(1)', 'NO', '', '0', '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'on update CURRENT_TIMESTAMP')
+
+TABLE: genome_temp
+--------------------------------------------
+('upid', 'varchar(20)', 'NO', 'PRI', '', '')
+('assembly_acc', 'varchar(20)', 'YES', '', None, '')
+('assembly_version', 'int(4) unsigned', 'YES', '', None, '')
+('wgs_acc', 'varchar(20)', 'YES', '', None, '')
+('wgs_version', 'int(4) unsigned', 'YES', '', None, '')
+('assembly_name', 'varchar(100)', 'YES', '', None, '')
+('assembly_level', "enum('contig','chromosome','scaffold','complete-genome')", 'YES', '', None, '')
+('study_ref', 'varchar(20)', 'YES', '', None, '')
+('description', 'mediumtext', 'YES', '', None, '')
+('total_length', 'bigint(20)', 'YES', '', None, '')
+('ungapped_length', 'bigint(20)', 'YES', '', None, '')
+('circular', 'tinyint(3)', 'YES', '', None, '')
+('ncbi_id', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('scientific_name', 'varchar(300)', 'YES', '', None, '')
+('common_name', 'varchar(200)', 'YES', '', None, '')
+('kingdom', 'varchar(50)', 'YES', '', None, '')
+('num_rfam_regions', 'int(10)', 'YES', '', None, '')
+('num_families', 'int(10)', 'YES', '', None, '')
+('is_reference', 'tinyint(1)', 'NO', '', '1', '')
+('is_representative', 'tinyint(1)', 'NO', '', '0', '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'on update CURRENT_TIMESTAMP')
+
+TABLE: genseq
+--------------------------------------------
+('upid', 'varchar(20)', 'NO', 'MUL', '', '')
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('chromosome_name', 'varchar(100)', 'YES', '', None, '')
+('chromosome_type', 'varchar(100)', 'YES', '', None, '')
+('version', 'varchar(6)', 'YES', '', None, '')
+
+TABLE: genseq_temp
+--------------------------------------------
+('upid', 'varchar(20)', 'NO', 'MUL', '', '')
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('chromosome_name', 'varchar(100)', 'YES', '', None, '')
+('chromosome_type', 'varchar(100)', 'YES', '', None, '')
+('version', 'varchar(6)', 'YES', '', None, '')
+
+TABLE: html_alignment
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('type', "enum('seed','genome','seedColorstock','genomeColorstock')", 'NO', 'MUL', None, '')
+('html', 'longblob', 'YES', '', None, '')
+('block', 'int(6)', 'NO', 'MUL', None, '')
+('html_alignmentscol', 'varchar(45)', 'YES', '', None, '')
+
+TABLE: keywords
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'PRI', '', '')
+('rfam_id', 'varchar(40)', 'YES', '', None, '')
+('description', 'varchar(100)', 'YES', 'MUL', 'NULL', '')
+('rfam_general', 'longtext', 'YES', '', None, '')
+('literature', 'longtext', 'YES', '', None, '')
+('wiki', 'longtext', 'YES', '', None, '')
+('pdb_mappings', 'longtext', 'YES', '', None, '')
+('clan_info', 'longtext', 'YES', '', None, '')
+
+TABLE: literature_reference
+--------------------------------------------
+('pmid', 'int(10)', 'NO', 'PRI', None, 'auto_increment')
+('title', 'tinytext', 'YES', '', None, '')
+('author', 'text', 'YES', '', None, '')
+('journal', 'tinytext', 'YES', '', None, '')
+
+TABLE: matches_and_fasta
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('match_list', 'longblob', 'YES', '', None, '')
+('fasta', 'longblob', 'YES', '', None, '')
+('type', "enum('rfamseq','genome','refseq')", 'NO', '', None, '')
+
+TABLE: motif
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+('motif_id', 'varchar(40)', 'YES', 'MUL', None, '')
+('description', 'varchar(75)', 'YES', '', None, '')
+('author', 'tinytext', 'YES', '', None, '')
+('seed_source', 'tinytext', 'YES', '', None, '')
+('gathering_cutoff', 'double(5,2)', 'YES', '', None, '')
+('trusted_cutoff', 'double(5,2)', 'YES', '', None, '')
+('noise_cutoff', 'double(5,2)', 'YES', '', None, '')
+('cmbuild', 'tinytext', 'YES', '', None, '')
+('cmcalibrate', 'tinytext', 'YES', '', None, '')
+('type', 'varchar(50)', 'YES', '', None, '')
+('num_seed', 'bigint(20)', 'YES', '', None, '')
+('average_id', 'double(5,2)', 'YES', '', None, '')
+('average_sqlen', 'double(7,2)', 'YES', '', None, '')
+('ecmli_lambda', 'double(10,5)', 'YES', '', None, '')
+('ecmli_mu', 'double(10,5)', 'YES', '', None, '')
+('ecmli_cal_db', 'mediumint(9)', 'YES', '', '0', '')
+('ecmli_cal_hits', 'mediumint(9)', 'YES', '', '0', '')
+('maxl', 'mediumint(9)', 'YES', '', '0', '')
+('clen', 'mediumint(9)', 'YES', '', '0', '')
+('match_pair_node', 'tinyint(1)', 'YES', '', '0', '')
+('hmm_tau', 'double(10,5)', 'YES', '', None, '')
+('hmm_lambda', 'double(10,5)', 'YES', '', None, '')
+('wiki', 'varchar(80)', 'YES', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'on update CURRENT_TIMESTAMP')
+
+TABLE: motif_database_link
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('db_id', 'tinytext', 'NO', '', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('db_link', 'tinytext', 'NO', '', None, '')
+('other_params', 'tinytext', 'YES', '', None, '')
+
+TABLE: motif_family_stats
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('num_hits', 'int(11)', 'YES', '', None, '')
+('frac_hits', 'decimal(4,3)', 'YES', '', None, '')
+('sum_bits', 'decimal(12,3)', 'YES', '', None, '')
+('avg_weight_bits', 'decimal(12,3)', 'YES', '', None, '')
+
+TABLE: motif_file
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('seed', 'longblob', 'NO', '', None, '')
+('cm', 'longblob', 'NO', '', None, '')
+
+TABLE: motif_literature
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pmid', 'int(10)', 'NO', 'MUL', None, '')
+('comment', 'tinytext', 'YES', '', None, '')
+('order_added', 'tinyint(3)', 'YES', '', None, '')
+
+TABLE: motif_matches
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('rfamseq_start', 'bigint(19)', 'YES', '', None, '')
+('rfamseq_stop', 'bigint(19)', 'YES', '', None, '')
+('query_start', 'int(11)', 'YES', '', None, '')
+('query_stop', 'int(11)', 'YES', '', None, '')
+('motif_start', 'int(11)', 'YES', '', None, '')
+('motif_stop', 'int(11)', 'YES', '', None, '')
+('e_value', 'varchar(15)', 'YES', '', None, '')
+('bit_score', 'double(7,2)', 'YES', '', None, '')
+
+TABLE: motif_old
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'PRI', None, '')
+('motif_id', 'varchar(40)', 'YES', 'MUL', None, '')
+('description', 'varchar(75)', 'YES', '', None, '')
+('author', 'tinytext', 'YES', '', None, '')
+('seed_source', 'tinytext', 'YES', '', None, '')
+('gathering_cutoff', 'double(5,2)', 'YES', '', None, '')
+('trusted_cutoff', 'double(5,2)', 'YES', '', None, '')
+('noise_cutoff', 'double(5,2)', 'YES', '', None, '')
+('cmbuild', 'tinytext', 'YES', '', None, '')
+('cmcalibrate', 'tinytext', 'YES', '', None, '')
+('type', 'varchar(50)', 'YES', '', None, '')
+('ecmli_lambda', 'double(10,5)', 'YES', '', None, '')
+('ecmli_mu', 'double(10,5)', 'YES', '', None, '')
+('ecmli_cal_db', 'mediumint(9)', 'YES', '', '0', '')
+('ecmli_cal_hits', 'mediumint(9)', 'YES', '', '0', '')
+('maxl', 'mediumint(9)', 'YES', '', '0', '')
+('clen', 'mediumint(9)', 'YES', '', '0', '')
+('match_pair_node', 'tinyint(1)', 'YES', '', '0', '')
+('hmm_tau', 'double(10,5)', 'YES', '', None, '')
+('hmm_lambda', 'double(10,5)', 'YES', '', None, '')
+('created', 'datetime', 'NO', '', None, '')
+('updated', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'on update CURRENT_TIMESTAMP')
+
+TABLE: motif_pdb
+--------------------------------------------
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pdb_id', 'varchar(4)', 'NO', 'MUL', None, '')
+('chain', 'varchar(4)', 'YES', '', None, '')
+('pdb_start', 'mediumint(9)', 'YES', '', None, '')
+('pdb_end', 'mediumint(9)', 'YES', '', None, '')
+
+TABLE: motif_ss_image
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('motif_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('image', 'longblob', 'YES', '', None, '')
+
+TABLE: pdb
+--------------------------------------------
+('pdb_id', 'varchar(4)', 'NO', 'PRI', None, '')
+('keywords', 'tinytext', 'YES', '', None, '')
+('title', 'mediumtext', 'YES', '', None, '')
+('date', 'tinytext', 'YES', '', None, '')
+('resolution', 'decimal(5,2)', 'YES', '', '0.00', '')
+('method', 'tinytext', 'YES', '', None, '')
+('author', 'mediumtext', 'YES', '', None, '')
+
+TABLE: pdb_full_region
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pdb_id', 'varchar(4)', 'NO', 'MUL', None, '')
+('chain', 'varchar(4)', 'YES', '', None, '')
+('pdb_start', 'mediumint(8)', 'NO', '', None, '')
+('pdb_end', 'mediumint(8)', 'NO', '', None, '')
+('bit_score', 'double(7,2)', 'NO', '', '0.00', '')
+('evalue_score', 'varchar(15)', 'NO', '', '0', '')
+('cm_start', 'mediumint(8)', 'NO', '', None, '')
+('cm_end', 'mediumint(8)', 'NO', '', None, '')
+('hex_colour', 'varchar(6)', 'YES', '', 'NULL', '')
+('is_significant', 'tinyint(1)', 'NO', 'MUL', '1', '')
+
+TABLE: pdb_full_region_old
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pdb_id', 'varchar(4)', 'NO', 'MUL', None, '')
+('chain', 'varchar(4)', 'YES', '', None, '')
+('pdb_start', 'mediumint(8)', 'NO', '', None, '')
+('pdb_end', 'mediumint(8)', 'NO', '', None, '')
+('bit_score', 'double(7,2)', 'NO', '', '0.00', '')
+('evalue_score', 'varchar(15)', 'NO', '', '0', '')
+('cm_start', 'mediumint(8)', 'NO', '', None, '')
+('cm_end', 'mediumint(8)', 'NO', '', None, '')
+('hex_colour', 'varchar(6)', 'YES', '', 'NULL', '')
+('is_significant', 'tinyint(1)', 'NO', 'MUL', '1', '')
+
+TABLE: pdb_rfam_reg
+--------------------------------------------
+('auto_pdb_reg', 'int(15) unsigned', 'NO', 'PRI', None, 'auto_increment')
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pdb_seq', 'varchar(6)', 'NO', 'MUL', None, '')
+('pdb_id', 'varchar(4)', 'NO', 'MUL', None, '')
+('chain', 'varchar(4)', 'YES', '', 'NULL', '')
+('pdb_res_start', 'mediumint(8)', 'YES', '', None, '')
+('pdb_res_end', 'mediumint(8)', 'YES', '', None, '')
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('seq_start', 'bigint(19) unsigned', 'YES', '', None, '')
+('seq_end', 'bigint(19) unsigned', 'YES', '', None, '')
+('hex_colour', 'varchar(6)', 'YES', '', 'NULL', '')
+
+TABLE: pdb_sequence
+--------------------------------------------
+('pdb_seq', 'varchar(6)', 'NO', 'PRI', None, '')
+('pdb_id', 'varchar(4)', 'NO', 'MUL', None, '')
+('chain', 'varchar(1)', 'YES', '', None, '')
+
+TABLE: processed_data
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('cm', 'longblob', 'YES', '', None, '')
+('ss_stats_pbp', 'longblob', 'YES', '', None, '')
+('ss_stats_seq', 'longblob', 'YES', '', None, '')
+('ss_stats_fam', 'longblob', 'YES', '', None, '')
+('scores_graph', 'longblob', 'YES', '', None, '')
+('genome_full', 'mediumtext', 'YES', '', None, '')
+('genome_full_md5', 'varchar(32)', 'YES', '', None, '')
+('refseq_full', 'mediumtext', 'YES', '', None, '')
+('refseq_full_md5', 'varchar(32)', 'YES', '', None, '')
+
+TABLE: pseudoknot
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('pseudoknot_id', 'varchar(5)', 'NO', 'MUL', None, '')
+('source', "enum('seed','rscape')", 'NO', 'MUL', None, '')
+('covariation', 'tinyint(4)', 'YES', '', '0', '')
+
+TABLE: refseq
+--------------------------------------------
+('refseq_acc', 'varchar(14)', 'NO', 'PRI', None, '')
+('description', 'mediumtext', 'YES', '', None, '')
+('species', 'mediumtext', 'YES', '', None, '')
+('ncbi_taxid', 'int(10)', 'YES', '', None, '')
+
+TABLE: refseq_full_region
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('refseq_acc', 'varchar(14)', 'NO', 'MUL', None, '')
+('seq_start', 'bigint(19) unsigned', 'NO', '', '0', '')
+('seq_end', 'bigint(19) unsigned', 'NO', '', None, '')
+('bit_score', 'double(7,2)', 'NO', '', '0.00', '')
+('evalue_score', 'varchar(15)', 'NO', '', '0', '')
+('cm_start', 'mediumint(8) unsigned', 'NO', '', None, '')
+('cm_end', 'mediumint(8) unsigned', 'NO', '', None, '')
+('truncated', "enum('0','5','3','53')", 'NO', '', None, '')
+
+TABLE: rfamseq
+--------------------------------------------
+('rfamseq_acc', 'varchar(25)', 'NO', 'PRI', '', '')
+('accession', 'varchar(25)', 'NO', '', '', '')
+('version', 'int(6) unsigned zerofill', 'NO', 'MUL', None, '')
+('ncbi_id', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('mol_type', "enum('protein','genomic DNA','DNA','ss-DNA','RNA','genomic RNA','ds-RNA','ss-cRNA','ss-RNA','mRNA','tRNA','rRNA','snoRNA','snRNA','scRNA','pre-RNA','other RNA','other DNA','unassigned DNA','unassigned RNA','viral cRNA','cRNA','transcribed RNA','ncRNA','ribozyme','antisense_RNA','other')", 'NO', '', None, '')
+('length', 'int(10) unsigned', 'YES', '', '0', '')
+('description', 'varchar(250)', 'NO', '', '', '')
+('previous_acc', 'mediumtext', 'YES', '', None, '')
+('source', 'char(20)', 'NO', '', None, '')
+
+TABLE: rfamseq_temp
+--------------------------------------------
+('rfamseq_acc', 'varchar(25)', 'NO', 'PRI', '', '')
+('accession', 'varchar(25)', 'NO', '', '', '')
+('version', 'int(6) unsigned zerofill', 'NO', 'MUL', None, '')
+('ncbi_id', 'int(10) unsigned', 'NO', 'MUL', None, '')
+('mol_type', "enum('protein','genomic DNA','DNA','ss-DNA','RNA','genomic RNA','ds-RNA','ss-cRNA','ss-RNA','mRNA','tRNA','rRNA','snoRNA','snRNA','scRNA','pre-RNA','other RNA','other DNA','unassigned DNA','unassigned RNA','viral cRNA','cRNA','transcribed RNA','ncRNA','ribozyme','antisense_RNA','other')", 'NO', '', None, '')
+('length', 'int(10) unsigned', 'YES', '', '0', '')
+('description', 'longtext', 'YES', '', None, '')
+('previous_acc', 'mediumtext', 'YES', '', None, '')
+('source', 'char(20)', 'NO', '', None, '')
+
+TABLE: rnacentral_matches
+--------------------------------------------
+('rfamseq_acc', 'varchar(25)', 'NO', 'MUL', '', '')
+('seq_start', 'bigint(19) unsigned', 'NO', 'MUL', '0', '')
+('seq_end', 'bigint(19) unsigned', 'NO', 'MUL', None, '')
+('md5', 'varchar(32)', 'NO', '', None, '')
+('rnacentral_id', 'varchar(25)', 'YES', 'MUL', None, '')
+('type', "enum('seed','full')", 'YES', '', 'full', '')
+
+TABLE: rscape_annotations
+--------------------------------------------
+('rfam_acc', 'varchar(10)', 'NO', 'PRI', '', '')
+('F', 'float', 'YES', '', None, '')
+('sensitivity', 'float', 'YES', '', None, '')
+('ppv', 'float', 'YES', '', None, '')
+('true', 'int(11)', 'YES', '', None, '')
+('found', 'int(11)', 'YES', '', None, '')
+('tp', 'int(11)', 'YES', '', None, '')
+('avgid', 'float', 'YES', '', None, '')
+('alen', 'int(11)', 'YES', '', None, '')
+('nseq', 'int(11)', 'YES', '', None, '')
+
+TABLE: secondary_structure_image
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('type', "enum('cons','dist','ent','fcbp','cov','disttruc','maxcm','norm','rchie','species','ss','rscape','rscape-cyk')", 'YES', 'MUL', None, '')
+('image', 'longblob', 'YES', '', None, '')
+
+TABLE: seed_region
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('rfamseq_acc', 'varchar(25)', 'YES', 'MUL', None, '')
+('seq_start', 'bigint(19) unsigned', 'NO', '', '0', '')
+('seq_end', 'bigint(19) unsigned', 'NO', '', None, '')
+('md5', 'varchar(32)', 'YES', '', None, '')
+
+TABLE: sunburst
+--------------------------------------------
+('rfam_acc', 'varchar(7)', 'NO', 'MUL', None, '')
+('data', 'longblob', 'NO', '', None, '')
+('type', "enum('rfamseq','genome','refseq')", 'NO', '', None, '')
+
+TABLE: taxonomic_tree
+--------------------------------------------
+('ncbi_code', 'int(10)', 'NO', 'PRI', None, '')
+('species', 'varchar(100)', 'YES', '', None, '')
+('taxonomy', 'mediumtext', 'YES', '', None, '')
+('lft', 'int(10)', 'YES', '', None, '')
+('rgt', 'int(10)', 'YES', '', None, '')
+('parent', 'varchar(100)', 'YES', '', None, '')
+('level', 'varchar(100)', 'YES', '', None, '')
+
+TABLE: taxonomy
+--------------------------------------------
+('ncbi_id', 'int(10) unsigned', 'NO', 'PRI', '0', '')
+('species', 'varchar(100)', 'NO', 'MUL', '', '')
+('tax_string', 'mediumtext', 'YES', '', None, '')
+('tree_display_name', 'varchar(100)', 'YES', '', None, '')
+('align_display_name', 'varchar(112)', 'YES', '', None, '')
+
+TABLE: taxonomy_websearch
+--------------------------------------------
+('ncbi_id', 'int(10) unsigned', 'YES', 'MUL', '0', '')
+('species', 'varchar(100)', 'YES', 'MUL', None, '')
+('rgt', 'int(10)', 'YES', 'MUL', None, '')
+('taxonomy', 'mediumtext', 'YES', '', None, '')
+('lft', 'int(10)', 'YES', 'MUL', None, '')
+('parent', 'int(10) unsigned', 'YES', 'MUL', None, '')
+('level', 'varchar(200)', 'YES', 'MUL', None, '')
+('minimal', 'tinyint(1)', 'NO', 'MUL', '0', '')
+('rank', 'varchar(100)', 'YES', '', None, '')
+
+TABLE: version
+--------------------------------------------
+('rfam_release', 'double(4,1)', 'NO', 'PRI', None, '')
+('rfam_release_date', 'date', 'NO', '', None, '')
+('number_families', 'int(10)', 'NO', '', None, '')
+('embl_release', 'tinytext', 'NO', '', None, '')
+
+TABLE: wikitext
+--------------------------------------------
+('auto_wiki', 'int(10) unsigned', 'NO', 'PRI', None, 'auto_increment')
+('title', 'varchar(150)', 'NO', 'UNI', None, '')
+
+
+
+
+
+
+
+
+
+
+Queries
+============================================
+
+>SELECT DISTINCT type FROM family ORDER BY type
+('Cis-reg;',)
+('Cis-reg; frameshift_element;',)
+('Cis-reg; IRES;',)
+('Cis-reg; leader;',)
+('Cis-reg; riboswitch;',)
+('Cis-reg; thermoregulator;',)
+('Gene;',)
+('Gene; antisense;',)
+('Gene; antitoxin;',)
+('Gene; CRISPR;',)
+('Gene; lncRNA;',)
+('Gene; miRNA;',)
+('Gene; ribozyme;',)
+('Gene; rRNA;',)
+('Gene; snRNA;',)
+('Gene; snRNA; snoRNA;',)
+('Gene; snRNA; snoRNA; CD-box;',)
+('Gene; snRNA; snoRNA; HACA-box;',)
+('Gene; snRNA; snoRNA; scaRNA;',)
+('Gene; snRNA; splicing;',)
+('Gene; sRNA;',)
+('Gene; tRNA;',)
+('Intron;',)
+
