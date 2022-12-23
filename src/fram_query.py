@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 import mysql.connector
 import wget
+import gzip
+import shutil
+import os
+import logging
 
 # --------------------------------------------------------------
 # RFAM - MYSQL DATABASE
@@ -80,13 +84,17 @@ def __Rfam_query_test():
 def __Rfam_download_fasta_file(filename: str):
     URL = "http://http.ebi.ac.uk/pub/databases/Rfam/CURRENT/fasta_files/"
     URL += filename + ".fa.gz"
-    print(URL)
+
+    log = logging.getLogger()
+    log.info("URL: "+URL)
     response = wget.download(URL, "../datasets/Rfam/"+filename+".fa.gz")
 
+    # Unzip the downloaded .gz file
+    with gzip.open("../datasets/Rfam/"+filename+".fa.gz", 'rb') as f_in:
+        with open("../datasets/Rfam/"+filename+".fa", 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+
+    # Delete the .gz file
+    os.remove("../datasets/Rfam/"+filename+".fa.gz")
 
 
-
-if __name__ == "__main__":
-    file_id = 12
-    file_name = "RF"+str(file_id).zfill(5)
-    __Rfam_download_fasta_file(file_name)

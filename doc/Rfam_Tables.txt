@@ -664,7 +664,7 @@ TABLE: wikitext
 Queries
 ============================================
 
->SELECT DISTINCT type FROM family ORDER BY type
+> SELECT DISTINCT type FROM family ORDER BY type
 ('Cis-reg;',)
 ('Cis-reg; frameshift_element;',)
 ('Cis-reg; IRES;',)
