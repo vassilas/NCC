@@ -4,7 +4,9 @@ import wget
 import gzip
 import shutil
 import os
+
 import logging
+log = logging.getLogger()
 
 # --------------------------------------------------------------
 # RFAM - MYSQL DATABASE
@@ -85,9 +87,18 @@ def __Rfam_download_fasta_file(filename: str):
     URL = "http://http.ebi.ac.uk/pub/databases/Rfam/CURRENT/fasta_files/"
     URL += filename + ".fa.gz"
 
-    log = logging.getLogger()
-    log.info("URL: "+URL)
-    response = wget.download(URL, "../datasets/Rfam/"+filename+".fa.gz")
+    
+    # Downlaod the file from Rfam
+    try:
+        log.info("wget URL: "+URL)
+        response = wget.download(URL, "../datasets/Rfam/"+filename+".fa.gz")
+    except:
+        log.error("wget wrong url "+URL)
+        return
+    else:
+        print()
+        log.info("wget response "+response)
+    
 
     # Unzip the downloaded .gz file
     with gzip.open("../datasets/Rfam/"+filename+".fa.gz", 'rb') as f_in:
@@ -98,3 +109,14 @@ def __Rfam_download_fasta_file(filename: str):
     os.remove("../datasets/Rfam/"+filename+".fa.gz")
 
 
+def __Rfam_get_type_by_file_name(filename: str):
+    log.info("SEARCH type for {filename}".format(filename=filename))
+    mycursor.execute("SELECT type FROM family WHERE rfam_acc LIKE '{filename}'".format(filename=filename))
+    for type in mycursor:
+        log.debug(type)
+
+
+def __Rfam_get_all_types():
+    mycursor.execute("SELECT type , COUNT(type) FROM family GROUP BY type")
+    for type in mycursor:
+        log.debug(type)

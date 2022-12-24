@@ -3,6 +3,8 @@
 ## Requirements
 * python
     * [docker](https://github.com/docker/docker-py) - Docker SDK for Python
+    * wget
+    * [fastaparser](https://fastaparser.readthedocs.io/en/latest/) - A Python FASTA file Parser and Writer
 
 
 
