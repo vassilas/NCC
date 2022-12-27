@@ -1,0 +1,3 @@
+## Bibliography in AMA format
+1. Kalvari I, Nawrocki EP, Argasinska J, et al. Non-Coding RNA Analysis Using the Rfam Database. Curr Protoc Bioinformatics. 2018;62(1):e51.  https://doi.org/10.1002/cpbi.51 
+2. Andrikos C, Makris E, Kolaitis A, Rassias G, Pavlatos C, Tsanakas P. Knotify: An Efficient Parallel Platform for RNA Pseudoknot Prediction Using Syntactic Pattern Recognition. Methods and Protocols. 2022; 5(1):14. https://doi.org/10.3390/mps5010014 

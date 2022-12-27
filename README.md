@@ -6,7 +6,14 @@
     * wget
     * [fastaparser](https://fastaparser.readthedocs.io/en/latest/) - A Python FASTA file Parser and Writer
 
-
+## RUN 
+```
+mkdir ./datasets/Rfam
+mkdir log
+pip install -r requirements.txt
+cd src/
+python ncc.py
+```
 
 ## Recources
 ---
