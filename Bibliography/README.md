@@ -1,3 +1,13 @@
-## Bibliography in AMA format
+## Bibliography
 1. Kalvari I, Nawrocki EP, Argasinska J, et al. Non-Coding RNA Analysis Using the Rfam Database. Curr Protoc Bioinformatics. 2018;62(1):e51.  https://doi.org/10.1002/cpbi.51 
-2. Andrikos C, Makris E, Kolaitis A, Rassias G, Pavlatos C, Tsanakas P. Knotify: An Efficient Parallel Platform for RNA Pseudoknot Prediction Using Syntactic Pattern Recognition. Methods and Protocols. 2022; 5(1):14. https://doi.org/10.3390/mps5010014 
+1. Andrikos C, Makris E, Kolaitis A, Rassias G, Pavlatos C, Tsanakas P. Knotify: An Efficient Parallel Platform for RNA Pseudoknot Prediction Using Syntactic Pattern Recognition. Methods and Protocols. 2022; 5(1):14. https://doi.org/10.3390/mps5010014 
+1. Panwar, B., Arora, A. & Raghava, G.P. Prediction and classification of ncRNAs using structural information. BMC Genomics 15, 127 (2014). https://doi.org/10.1186/1471-2164-15-127
+1. Muhan Zhang, Zhicheng Cui, Marion Neumann, and Yixin Chen. 2018. An end-to-end deep learning architecture for graph classification. (AAAI'18/IAAI'18/EAAI'18). AAAI Press, Article 544, 4438–4445. https://dl.acm.org/doi/abs/10.5555/3504035.3504579
+1. Fiannaca, A., La Rosa, M., La Paglia, L. et al. nRC: non-coding RNA Classifier based on structural features. BioData Mining 10, 27 (2017). https://doi.org/10.1186/s13040-017-0148-2
+1. Sato K, Kato Y, Hamada M, Akutsu T, Asai K. IPknot: fast and accurate prediction of RNA secondary structures with pseudoknots using integer programming. Bioinformatics. 2011;27(13):i85-i93. doi:10.1093/bioinformatics/btr215
+1. Kai Chen, Xiaodong Zhu, Lei Hao et al. ncDENSE: a novel computational method based on a deep learning framework for non-coding RNAs family prediction, 21 December 2022, PREPRINT (Version 1) available at Research Square https://doi.org/10.21203/rs.3.rs-2374139/v1
+1. Nithin, C., Mukherjee, S., Basak, J., & Bahadur, R. (2022). NCodR: A multi-class support vector machine classification to distinguish non-coding RNAs in Viridiplantae. Quantitative Plant Biology, 3, E23. doi:10.1017/qpb.2022.18
+1. Wang, L., Zhong, X., Wang, S. et al. ncDLRES: a novel method for non-coding RNAs family prediction based on dynamic LSTM and ResNet. BMC Bioinformatics 22, 447 (2021). https://doi.org/10.1186/s12859-021-04365-4
+1. Childs, L., Nikoloski, Z., May, P., & Walther, D. (2009). Identification and classification of ncRNA molecules using graph properties. Nucleic acids research, 37(9), e66. https://doi.org/10.1093/nar/gkp206
+1. Christian Borgelt, Thorsten Meinl, and Michael Berthold. 2005. MoSS: a program for molecular substructure mining. In Proceedings of the 1st international workshop on open source data mining: frequent pattern mining implementations (OSDM '05). Association for Computing Machinery, New York, NY, USA, 6–15. https://doi.org/10.1145/1133905.1133908
+1. Wang, L., Zheng, S., Zhang, H., Qiu, Z., Zhong, X., Liuliu, H., & Liu, Y. (2021). ncRFP: A Novel end-to-end Method for Non-Coding RNAs Family Prediction Based on Deep Learning. IEEE/ACM transactions on computational biology and bioinformatics, 18(2), 784–789. https://doi.org/10.1109/TCBB.2020.2982873
