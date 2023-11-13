@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from os import listdir
 import mysql.connector
 import wget
 import gzip
@@ -197,6 +198,7 @@ def get_RNA_Families_in_interest() -> []:
         'Cis-reg; riboswitch;',
         'Gene; ribozyme;',
         'Gene; rRNA;',
+        'Gene; miRNA;',
         'Gene; snRNA; snoRNA; CD-box;',
         'Gene; snRNA; snoRNA; HACA-box;',
         'Gene; snRNA; snoRNA; scaRNA;',
@@ -213,40 +215,171 @@ def __Rfam_download_all_fasta_files_in_interest():
 
 
 
-def __create_fasta_file_with_class(fasta_files,RNA_class)
+def __create_fasta_file_with_class(fasta_files: list[str] ,RNA_class: str) -> int:
+    
+    num_of_sequences = 0
+    output_filename = "../datasets/Rfam/"+RNA_class+".fa"
 
+    output_file = open(output_filename,'w')
+    for fasta_filename in fasta_files:
+        fasta_file = open("../datasets/Rfam/"+fasta_filename+".fa",'r')
+        for line in fasta_file:
+            if(line[0] == '>'):
+                output_file.write(">"+RNA_class+"\n")
+                num_of_sequences += 1
+            else:
+                output_file.write(line)
 
+    return num_of_sequences
+        
 
 
 def __combine_fasta_files_per_class():
     
     rfam_acc_list = []
+    num_of_sequences_per_family = {}
 
-    # Class: IRES
+    # For 9 of 13 families the process of querying and grouping is the same 
+    # By using only the type of family in Rfam query
     # ------------------------------------------------------------------
-    rfam_acc_list.clear()
-    query = "SELECT rfam_acc FROM family WHERE type=\"Cis-reg; IRES;\""
-    print("\nQuery: " + query)
-    mycursor.execute(query)
-    for rfam_acc in mycursor:
-        rfam_acc_list.append(rfam_acc[0])
+    RNA_Families_9 = {
+        'IRES'          : 'Cis-reg; IRES;',
+        'leader'        : 'Cis-reg; leader;',
+        'riboswitch'    : 'Cis-reg; riboswitch;',
+        'miRNA'         : 'Gene; miRNA;',
+        'ribozyme'      : 'Gene; ribozyme;',
+        'CD-box'        : 'Gene; snRNA; snoRNA; CD-box;',
+        'HACA-box'      : 'Gene; snRNA; snoRNA; HACA-box;',
+        'scaRNA'        : 'Gene; snRNA; snoRNA; scaRNA;',
+        'tRNA'          : 'Gene; tRNA;'
+        }
+
+    for RNA_Class, Rfam_type in RNA_Families_9.items():
+        print("\nCreating Dataset for RNA_Class: "+RNA_Class)
+        print("--------------------------------------------------")
+        rfam_acc_list.clear()
+        query = "SELECT rfam_acc FROM family WHERE type=\""+Rfam_type+"\""
+        print("Query: " + query)
+        mycursor.execute(query)
+        for rfam_acc in mycursor:
+            rfam_acc_list.append(rfam_acc[0])
+        
+        num_of_sequences = __create_fasta_file_with_class(fasta_files=rfam_acc_list, RNA_class=RNA_Class)
+        num_of_sequences_per_family[RNA_Class] = num_of_sequences
 
 
-    # Class: IRES
+    # Creating fasta datasets for the rest 4 RNA_Classes
+    # By using the type of family and the rfam_id in Rfam query
     # ------------------------------------------------------------------
+    RNA_Families_4 = [
+        '5S_rRNA',
+        '5_8S_rRNA',
+        'Intron_gpI',
+        'Intron_gpII'
+        ]
 
-    # Class: IRES
-    # ------------------------------------------------------------------
+    for RNA_Class in RNA_Families_4:
+        print("\nCreating Dataset for RNA_Class: "+RNA_Class)
+        print("--------------------------------------------------")
+        rfam_acc_list.clear()
+        query = "SELECT rfam_acc FROM family WHERE rfam_id=\""+RNA_Class+"\""
+        print("Query: " + query)
+        mycursor.execute(query)
+        for rfam_acc in mycursor:
+            rfam_acc_list.append(rfam_acc[0])
+
+        num_of_sequences = __create_fasta_file_with_class(fasta_files=rfam_acc_list, RNA_class=RNA_Class)
+        num_of_sequences_per_family[RNA_Class] = num_of_sequences
+
+    print(num_of_sequences_per_family)
 
 
 
+
+def __delete_all_downloaded_fasta_files():
+    dir_path = "../datasets/Rfam/"
+    files = listdir(dir_path)
+    print(files)
+    for file in files:
+        if file[:2] == 'RF':
+            print(file)
+            os.remove(dir_path+file)
+
+
+def __extending_IRES_from_IRESbase_database():
+    rfam_IRES_filename = 'IRES.fa'
+    IRESbase_filename = 'All_IRES.fa'
+    rfam_IRES_sequences = []
+    IRESbase_sequences = []
+    IRES_Combined = []
+
+    rfam_file = open('../datasets/Rfam/'+rfam_IRES_filename,'r')
+    for line in rfam_file:
+        if line[0] != '>' :
+            rfam_IRES_sequences.append(line[:-1])
+    rfam_file.close()
+
+    IRESfile_file = open('../datasets/IRESbase/'+IRESbase_filename,'r')
+    for line in IRESfile_file:
+        if line [0] != '>' :
+            IRESbase_sequences.append(line[:-1])
+    IRESfile_file.close
+
+    IRES_Combined = rfam_IRES_sequences + list(set(IRESbase_sequences) - set(rfam_IRES_sequences))
+    rfam_file = open('../datasets/Finalsets/'+rfam_IRES_filename,'w')
+    for seq in IRES_Combined:
+        rfam_file.write('>IRES\n')
+        rfam_file.write(seq+'\n')
+
+
+    
+def __count_seq_per_family():
+    RNA_Families_list = [
+        'IRES'          , 
+        'leader'        ,
+        'riboswitch'    ,
+        'miRNA'         ,
+        'ribozyme'      ,
+        'CD-box'        ,
+        'HACA-box'      ,
+        'scaRNA'        ,
+        'tRNA'          ,
+        '5S_rRNA'       ,
+        '5_8S_rRNA'     ,
+        'Intron_gpI'    ,
+        'Intron_gpII'
+    ]
+
+    RNA_Families_Seq_count = {}
+
+    for RNA_Family in RNA_Families_list:
+        file = open('../datasets/Finalsets/'+RNA_Family+'.fa','r')
+        count = 0
+        for line in file:
+            count += 1
+        RNA_Families_Seq_count[RNA_Family] = int(count/2)
+    
+    return RNA_Families_Seq_count
+    
 
 
 if __name__ == '__main__':
     # Configure the logger
     config.config_logger()
 
-    __combine_fasta_files_per_class()
+    # Download all fasta files in interes from Rfam database
+    # Fasta files in interest are the ones that have 
+    # small non-coding RNA sequences
+    # __Rfam_download_all_fasta_files_in_interest()
+
+    # 
+    # __combine_fasta_files_per_class()
+
+    # Delete all Downloaded fasta files 
+    # __delete_all_downloaded_fasta_files()
+
+
+
 
 
 
