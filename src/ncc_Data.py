@@ -2,10 +2,6 @@ import numpy as np
 import csv
 import h5py
 
-file_train = '../datasets/dataset_test_sample_10.fasta'
-file_test = '../datasets/dataset_train_sample_10.fasta'
-
-
 
 # Ribisome encoding
 # 
@@ -120,20 +116,20 @@ if __name__ == '__main__':
 
     # Create CSV file
     # --------------------------------------
-    Create_CSV_RNA_dataset(in_file='../datasets/dataset.fasta', out_file='../datasets/dataset.csv')
+    Create_CSV_RNA_dataset(in_file='../datasets/Finalsets/dataset.fasta', out_file='../datasets/Finalsets/dataset.csv')
 
     # Sequence Padding and Cutting
     # --------------------------------------
-    RNA_Seq_padding_and_cutting(in_file='../datasets/dataset.fasta', out_file='../datasets/dataset_padded_cutted.fasta', length=500)
+    RNA_Seq_padding_and_cutting(in_file='../datasets/Finalsets/dataset.fasta', out_file='../datasets/Finalsets/dataset_padded_cutted.fasta', length=500)
 
-    # Sequence One-hot encoding
-    # --------------------------------------
-    rna,label = RNA_data_encoding(in_file='../datasets/dataset_padded_cutted.fasta')
+    # # Sequence One-hot encoding
+    # # --------------------------------------
+    rna,label = RNA_data_encoding(in_file='../datasets/Finalsets/dataset_padded_cutted.fasta')
 
-    # Saving dataset as HDF5
-    # --------------------------------------
+    # # Saving dataset as HDF5
+    # # --------------------------------------
     rna = np.array(rna)
     label = np.array(label)
-    h5_file = h5py.File("../datasets/dataset_padded_cutted.hdf5", 'w') # Save the original data as h5 files.
+    h5_file = h5py.File("../datasets/Finalsets/dataset_padded_cutted.hdf5", 'w') # Save the original data as h5 files.
     h5_file.create_dataset('RNA_Sequence', data=rna)
     h5_file.create_dataset('RNA_Class', data=label)

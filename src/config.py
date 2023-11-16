@@ -10,7 +10,7 @@ def config_logger():
     format = "%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s"
 
     # LOGS TO FILE
-    filelog = logging.FileHandler("ncc_logfile.log")
+    filelog = logging.FileHandler("../log/ncc_logfile.log")
     filelog.setLevel(logging.DEBUG)
     logformat = logging.Formatter(format,datefmt='%Y-%m-%d %H:%M:%S')
     filelog.setFormatter(logformat)

@@ -370,16 +370,16 @@ if __name__ == '__main__':
     # Download all fasta files in interes from Rfam database
     # Fasta files in interest are the ones that have 
     # small non-coding RNA sequences
-    # __Rfam_download_all_fasta_files_in_interest()
+    __Rfam_download_all_fasta_files_in_interest()
 
     # 
-    # __combine_fasta_files_per_class()
+    __combine_fasta_files_per_class()
 
     # Delete all Downloaded fasta files 
-    # __delete_all_downloaded_fasta_files()
+    __delete_all_downloaded_fasta_files()
 
 
-
+    print(__count_seq_per_family())
 
 
 
