@@ -61,8 +61,8 @@ Performance comparison of several prediction methods
     <td>0.8667</td>
     <td>0.8574</td>
   </tr>
-  <tr style="background-color: #05871e">
-    <td>NCC</td>
+  <tr>
+    <td><mark>NCC</mark></td>
     <td>0.9844</td>
     <td> - </td>
     <td> - </td>
