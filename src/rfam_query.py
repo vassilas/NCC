@@ -189,7 +189,8 @@ def __Rfam_get_all_rfam_acc_of__RNA_family_types_of_interest():
     return get_RNA_Families_in_interest(), rfam_acc_Lists
 
 
-
+# Update if you need more or less RNA families to be downloaded form Rfam db
+# 
 def get_RNA_Families_in_interest() -> []:
     return [
         'Cis-reg; IRES;',
