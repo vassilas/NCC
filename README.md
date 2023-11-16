@@ -64,10 +64,10 @@ Performance comparison of several prediction methods
   <tr>
     <td> --> NCC </td>
     <td>0.9844</td>
-    <td> - </td>
-    <td> - </td>
-    <td> - </td>
-    <td> - </td>
+    <td> 0.9808 </td>
+    <td> 0.9830 </td>
+    <td> 0.9819 </td>
+    <td> 0.9831 </td>
   </tr>
   <tr>
     <td>MncR</td>
