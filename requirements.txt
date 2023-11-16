@@ -1,3 +1,15 @@
 docker
 wget
 fastaparser
+keras
+pytorch
+tensorflow
+h5py
+sklearn
+pandas
+csv
+numpy
+matplotlib
+importlib
+seaborn
+mysql
