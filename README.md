@@ -9,7 +9,7 @@ Performance comparison of several prediction methods
     <th>Method/Model</th>
     <th>Accuracy</th>
     <th>Sensitivity</th>
-    <th>Precesion</th>
+    <th>Precision</th>
     <th>F-score</th>
     <th>MCC</th>
   </tr>
