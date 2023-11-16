@@ -62,7 +62,7 @@ Performance comparison of several prediction methods
     <td>0.8574</td>
   </tr>
   <tr>
-    <td><mark>NCC</mark></td>
+    <td> --> NCC </td>
     <td>0.9844</td>
     <td> - </td>
     <td> - </td>
