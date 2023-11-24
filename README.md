@@ -3,7 +3,12 @@ A new AI model trained and tested with fresh updated dataset of small Non-coding
 Biological experimental methods for identifying ncRNA families are not only time-consuming and labor-intensive 
 but also expensive, making them impractical for the demands of high-throughput technology.
 
-Performance comparison of several prediction methods
+<div align="center">
+    <img src="https://raw.githubusercontent.com/vassilas/NCC/main/doc/images/network_diagram.png" width=80% />
+</div>
+
+<br><br>
+<h2>Performance comparison of several prediction methods</h2>
  <table align="center">
   <tr>
     <th>Method/Model</th>
@@ -78,6 +83,9 @@ Performance comparison of several prediction methods
     <td> - </td>
   </tr>
 </table> 
+
+
+
 
 
 ## The main modules of this Repo 
