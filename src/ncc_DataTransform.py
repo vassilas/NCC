@@ -54,13 +54,13 @@ def RNA_data_encoding(in_file: str):
             seq_List = []
             for i in range(len(line[0: -1])):
                 if (i < len(line) - 1):
-                    if (line[i] == 'A' or line[i] == 'a'):
+                    if (line[i] == 'A'):
                         seq_List.append(A_rep_8d)
-                    elif (line[i] == 'T' or line[i] == 't'):
+                    elif (line[i] == 'T' or line[i] == 'U'):
                         seq_List.append(U_rep_8d)
-                    elif (line[i] == 'C' or line[i] == 'c'):
+                    elif (line[i] == 'C'):
                         seq_List.append(C_rep_8d)
-                    elif (line[i] == 'G' or line[i] == 'g'):
+                    elif (line[i] == 'G'):
                         seq_List.append(G_rep_8d)
                     else:
                         seq_List.append(X_rep_8d)
