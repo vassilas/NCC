@@ -68,11 +68,11 @@ but also expensive, making them impractical for the demands of high-throughput t
   </tr>
   <tr>
     <td> --> NCC </td>
-    <td>0.9844</td>
-    <td> 0.9808 </td>
-    <td> 0.9830 </td>
-    <td> 0.9819 </td>
-    <td> 0.9831 </td>
+    <td>0.9897</td>
+    <td> 0.9870 </td>
+    <td> 0.9892 </td>
+    <td> 0.9880 </td>
+    <td> 0.9889 </td>
   </tr>
   <tr>
     <td>MncR</td>
