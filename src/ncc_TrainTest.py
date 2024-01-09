@@ -46,7 +46,7 @@ def train():
                     validation_data=(X_test, Y_test),
                     workers=8,
                     shuffle=True,
-                    steps_per_epoch=steps_per_epoch, #if not specified = (number of samples)/(batch size) = number of samples
+                    steps_per_epoch=steps_per_epoch, #if not specified = (number of samples)/(batch size) = number of steps
                     validation_steps=validation_steps)
 
     print("1. MODEL SAVE")

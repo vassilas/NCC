@@ -469,6 +469,14 @@ def ncc_Model_15(): # Model
 # precision = 0.9836186254198576
 # f1 = 0.9827285575583731
 # mcc = 0.9836704832311708
+
+
+# rfam
+# accuracy = 0.895
+# Sensitivity = 0.895
+# precision = 0.8950614785679074
+# f1 = 0.8935450572275052
+# mcc = 0.8865074655168514
 def ncc_Model_16(): # Model
     inputs = Input(shape=(500, 8,))
     out = Conv1D(filters=32,kernel_size=8,strides=1,activation='relu')(inputs)
@@ -579,7 +587,17 @@ def ncc_Model_19(): # Model
     return model
 
 
+# Train: dataset_003_08d
+# Test: dataset_002_08d
+# ---------------------------------------
+# accuracy = 0.9142307692307692
+# Sensitivity = 0.9142307692307694
+# precision = 0.9154401839376296
+# f1 = 0.9142229639738342
+# mcc = 0.9071868515854054
 
+# NCC
+# ---------------------------------------
 # accuracy = 0.9897994269340974
 # Sensitivity = 0.9870139049819442
 # precision = 0.9892415222736667
@@ -598,6 +616,77 @@ def ncc_Model_20(): # Model
             bias_initializer='zero'
         ))(out)
     out = Flatten()(out)
+    out = Dense(13, activation='softmax')(out)
+    model = Model(inputs=[inputs], outputs=out)
+    return model
+
+# Train: dataset_003_08d
+# Test: dataset_002_08d
+# ---------------------------------------
+# accuracy = 0.9188461538461539
+# Sensitivity = 0.9188461538461538
+# precision = 0.9215575913843619
+# f1 = 0.9172564186196918
+# mcc = 0.9126029629566416
+
+# Train: dataset_004_08d
+# Test: dataset_002_08d
+# ---------------------------------------
+# accuracy = 0.926923076923077
+# Sensitivity = 0.9269230769230768
+# precision = 0.9281730445106077
+# f1 = 0.9271264366585444
+# mcc = 0.9209059460879675
+def ncc_Model_21(): # Model
+    inputs = Input(shape=(500, 8,))
+    out = Conv1D(filters=32,kernel_size=8,strides=1,activation='relu')(inputs)
+    out = MaxPooling1D(pool_size=4)(out)
+    out = Bidirectional(GRU(
+            units=128, 
+            return_sequences=True, 
+            kernel_initializer='RandomNormal', 
+            dropout= 0.3,
+            recurrent_initializer='RandomNormal', 
+            bias_initializer='zero'
+        ))(out)
+    out = Flatten()(out)
+    out = Dense(1024, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
+    out = Dense(512, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
+    out = Dense(128, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
+    out = Dense(13, activation='softmax')(out)
+    model = Model(inputs=[inputs], outputs=out)
+    return model
+
+# Train: dataset_003_08d
+# Test: dataset_002_08d
+# ---------------------------------------
+# accuracy = 0.9292307692307692
+# Sensitivity = 0.9292307692307691
+# precision = 0.931189216261044
+# f1 = 0.9293499153046424
+# mcc = 0.9234800066296411
+def ncc_Model_22():
+    inputs = Input(shape=(500, 8,))
+    out = Conv1D(filters=32,kernel_size=8,strides=1,activation='relu')(inputs)
+    out = MaxPooling1D(pool_size=4)(out)
+    out = Bidirectional(GRU(
+            units=512, 
+            return_sequences=True, 
+            kernel_initializer='RandomNormal', 
+            dropout= 0.3,
+            recurrent_initializer='RandomNormal', 
+            bias_initializer='zero'
+        ))(out)
+    out = Flatten()(out)
+    out = Dense(1024, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
+    out = Dense(512, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
+    out = Dense(128, kernel_initializer='RandomNormal', bias_initializer='zeros', activation='relu')(out)
+    out = Dropout(0.4)(out)
     out = Dense(13, activation='softmax')(out)
     model = Model(inputs=[inputs], outputs=out)
     return model
